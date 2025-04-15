@@ -1,1 +1,10 @@
-1
+import psycopg2
+conn = psycopg2.connect(host="localhost", dbname="postgres", user="postgres", password="inkar10", port=5432)
+cur = conn.cursor()
+first_name = input("Name: ")
+last_name = input("Last Name: ")
+phone_number = input("Phone Number: ")
+cur.execute("""INSERT INTO PhoneBook(FirstName, LastName, PhoneNumber) VALUES (%s, %s, %s);""", (first_name, last_name, phone_number))
+conn.commit()
+cur.close()
+conn.close()
